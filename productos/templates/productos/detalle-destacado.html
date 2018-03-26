@@ -1,0 +1,6 @@
+{{ object.nombre }}<br>
+{{ object.descripcion }}<br>
+{{ object.precio }}<br>
+{% if object.imagen %}
+    <img src="{{ object.imagen.url }}" width="300">
+{% endif %}

@@ -15,8 +15,21 @@ Including another URLconf
 """
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
+
+# from productos.views import (
+#         ListaProducto,
+#         lista_producto,
+#         ListaProductoDestacado,
+#         ###########
+#         DetalleProducto,
+#         detalle_producto,
+#         DetalleProductoDestacado,
+#         ###########
+#         DetalleProductoMarcado
+#         )
+
 from .views import home_page, contact_page, about_page
 
 
@@ -26,6 +39,16 @@ urlpatterns = [
     url(r'^$', home_page),
     url(r'^contact/$', contact_page),
     url(r'^about/$', about_page),
+
+    url(r'^productos/',include("productos.urls")),
+
+    # url(r'^productos/$', ListaProducto.as_view()),
+    # url(r'^productos-fbv/$', lista_producto),
+    # url(r'^destacados/$', ListaProductoDestacado.as_view()),
+    # # url(r'^productos/(?P<pk>\d+)/$', DetalleProducto.as_view()),
+    # url(r'^productos-fbv/(?P<pk>\d+)/$', detalle_producto),
+    # url(r'^destacados/(?P<pk>\d+)/$', DetalleProductoDestacado.as_view()),
+    # url(r'^productos/(?P<marcado>[\w-]+)/$', DetalleProductoMarcado.as_view()),
 ]
 if settings.DEBUG:
     urlpatterns = urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
