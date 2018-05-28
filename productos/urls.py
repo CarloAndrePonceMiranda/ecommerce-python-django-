@@ -7,6 +7,6 @@ from .views import (
 
 
 urlpatterns = [
-    url(r'^$', ListaProducto.as_view()),
-    url(r'^(?P<marcado>[\w-]+)/$', DetalleProductoMarcado.as_view()),
+    url(r'^$', ListaProducto.as_view(),name='lista'),
+    url(r'^(?P<marcado>[\w-]+)/$', DetalleProductoMarcado.as_view(), name='detalle'),
 ]

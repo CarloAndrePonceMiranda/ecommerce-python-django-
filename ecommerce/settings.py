@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Monterrey'
 
 USE_I18N = True
 
@@ -126,6 +126,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT =  os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
-
+USE_DJANGO_JQUERY = True
 MEDIA_URL = '/media/'
 MEDIA_ROOT =  os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
+LOGOUT_REDIRECT_URL='/'

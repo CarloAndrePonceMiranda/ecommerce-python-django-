@@ -14,37 +14,41 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.contrib.auth import views
 from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
 
-# from productos.views import (
+from productos.views import (
 #         ListaProducto,
 #         lista_producto,
-#         ListaProductoDestacado,
+        ListaProductoDestacado,
 #         ###########
 #         DetalleProducto,
 #         detalle_producto,
 #         DetalleProductoDestacado,
 #         ###########
 #         DetalleProductoMarcado
-#         )
+         )
 
-from .views import home_page, contact_page, about_page
+from .views import home_page, contact_page, about_page, login_page, logout, register_page
 
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', home_page),
-    url(r'^contact/$', contact_page),
-    url(r'^about/$', about_page),
+    url(r'^$', home_page,name='home'),
+    url(r'^contact/$', contact_page,name='contacto'),
+    url(r'^about/$', about_page,name='about'),
+    url(r'^login/$', login_page,name='login'),
+    url(r'^register/$', register_page,name='register'),
+    url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
 
-    url(r'^productos/',include("productos.urls")),
+    url(r'^productos/',include("productos.urls",namespace='productos')),
 
     # url(r'^productos/$', ListaProducto.as_view()),
     # url(r'^productos-fbv/$', lista_producto),
-    # url(r'^destacados/$', ListaProductoDestacado.as_view()),
+    url(r'^destacados/$', ListaProductoDestacado.as_view(),name='destacados'),
     # # url(r'^productos/(?P<pk>\d+)/$', DetalleProducto.as_view()),
     # url(r'^productos-fbv/(?P<pk>\d+)/$', detalle_producto),
     # url(r'^destacados/(?P<pk>\d+)/$', DetalleProductoDestacado.as_view()),

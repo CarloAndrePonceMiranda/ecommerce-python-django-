@@ -1,6 +1,37 @@
-{{ object.nombre }}<br>
-{{ object.descripcion }}<br>
-{{ object.precio }}<br>
-{% if object.imagen %}
-    <img src="{{ object.imagen.url }}" width="300">
-{% endif %}
+{% extends 'base.html' %}
+{% block head_title %}| Productos{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    {% if object.destacado == True %}
+
+    <div class="bg-warning mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+      <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 600px; border-radius: 21px 21px 0 0;">
+        {% if object.imagen %}
+            <img src="{{ object.imagen.url }}" width='100%' style="opacity:.5">
+        {% endif %}
+      </div>
+      <div class="my-3 py-3 text-justify" style="padding:80px; background: black!important;">
+        <h2 class="display-5">Nombre: {{ object.nombre }}</h2>
+        <p class="lead text-muted">Agregado hace {{ object.timestamp|timesince }}</p>
+        <p class="lead text-center">Descripción: {{ object.descripcion|linebreaks }}</p>
+        <p class="lead text-right">A solo - $ {{ object.precio }} MXN</p>
+      </div>
+    </div>
+    {% else %}
+        <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+          <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 600px; border-radius: 21px 21px 0 0;">
+            {% if object.imagen %}
+                <img src="{{ object.imagen.url }}" width='100%' style="opacity:.5">
+            {% endif %}
+          </div>
+          <div class="my-3 py-3 text-justify" style="padding:80px; background: rgba(0,0,0,1);">
+            <h2 class="display-5">Nombre: {{ object.nombre }}</h2>
+            <p class="lead text-center">Descripción: {{ object.descripcion|linebreaks }}</p>
+            <p class="lead text-right">A solo - $ {{ object.precio }} MXN</p>
+          </div>
+        </div>
+        {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -3,6 +3,7 @@ import os
 from django.db import models
 from django.db.models.signals import pre_save, post_save
 from .utils import unique_slug_generator
+from django.urls import reverse
 
 
 # Create your models here.
@@ -55,13 +56,15 @@ class Producto(models.Model):
     imagen      = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     destacado   = models.BooleanField(default=False)
     activo      = models.BooleanField(default=True)
+    timestamp   = models.DateTimeField(auto_now_add=True)
 
     objects = ManejadorProducto()
     def __str__(self):
         return self.nombre
 
     def get_absolute_url(self):
-        return "/productos/{marcado}/".format(marcado=self.marcado)
+        # return "/productos/{marcado}/".format(marcado=self.marcado)
+        return reverse("productos:detalle", kwargs={"marcado": self.marcado})
 
 
 def producto_pre_guardado_recividor(sender, instance, *arg, **kwargs):

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.http import Http404
 from django.views.generic import ListView, DetailView
 from django.shortcuts import render, get_object_or_404
@@ -56,7 +57,7 @@ class DetalleProductoMarcado(DetailView):
             qs = Producto.objects.filter(marcado=marcado, activo=True)
             instancia = qs.first()
         except:
-            raise Http404("¡Uhhmm!")
+            raise Http404("¡Uhhmm")
         return instancia
 
 

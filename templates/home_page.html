@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block head_title %}{% if title %}{{title}} | Tienda {% else %} Tienda {% endif %}{% endblock %}
+{% block content %}
+<div class="container">
+  <h1>{{title}}</h1>
+  <p>{{content}}</p>
+  {% if title == 'Contacto' %}
+  <div class="col-lg-6 col-12">
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit" class="btn btn-success">Enviar</button>
+    </form>
+  </div>
+  {% endif %}
+  {% if user.is_authenticated %}
+    {% if title == 'Inicio' %}
+    <div class="col-lg-6 col-12">
+      <h2>Hola de Nuevo {% firstof request.user.get_short_name request.user.get_username %}</h2>
+    </div>
+    {% endif %}
+  {% endif %}
+</div>
+
+{% endblock %}
